@@ -40,7 +40,7 @@ Version Control:
 
 Git & GitHub
 
-⚙️ Setup & Local Installation
+Setup & Local Installation
 Follow these steps to get a local copy of the project up and running on your machine.
 
 Prerequisites:
@@ -54,9 +54,7 @@ Steps:
 Clone the repository:
 
 git clone https://github.com/j213j213/nbanflnews.git
-cd your-repo-name
-
-(Replace YOUR_USERNAME and your-repo-name with your actual GitHub details)
+cd nbanflnews
 
 Install dependencies:
 
@@ -75,9 +73,9 @@ Open http://localhost:3000 in your browser to see the application.
 Deployment
 This application is deployed using Vercel. Any changes pushed to the main branch of the connected GitHub repository automatically trigger a new deployment.
 
-Live Demo: https://nbanflnews.com (Replace with your actual live domain)
+Live Demo: https://nbanflnews.com (Replace with your actual live domain if different)
 
-💡 Future Enhancements (Ideas for further development)
+Future Enhancements (Ideas for further development)
 AI-Powered Summaries: Re-integrate AI summarization for news articles (e.g., using a dedicated microservice on Google Cloud Run for cost-effective scaling).
 
 AI Chatbot: Re-introduce an AI chatbot for interactive sports news queries (potentially using RAG with a vector database for real-time data).
