@@ -3,27 +3,36 @@
 import React, { useState } from 'react';
 import FeedList from '@/components/FeedList';
 import RefreshButton from '@/components/RefreshButton';
+// Chatbot import removed
+// import Chatbot from '@/components/Chatbot'; 
 
 const sources = {
-  NBA: 'https://www.cbssports.com/rss/headlines/nba/',
-  NFL: 'https://www.cbssports.com/rss/headlines/nfl/',
+  NBA: [
+    'https://www.cbssports.com/rss/headlines/nba/',
+    'https://www.espn.com/espn/rss/nba/news',
+    'https://sports.yahoo.com/nba/rss/',
+  ],
+  NFL: [
+    'https://www.cbssports.com/rss/headlines/nfl/',
+    'https://www.espn.com/espn/rss/nfl/news',
+    'https://sports.yahoo.com/nfl/rss/',
+  ],
 };
 
 export default function HomePage() {
-  const [feedUrl, setFeedUrl] = useState(sources.NBA);
+  const [feedUrls, setFeedUrls] = useState(sources.NBA);
   const [active, setActive] = useState<'NBA' | 'NFL'>('NBA');
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const handleToggleFeed = (source: 'NBA' | 'NFL') => {
     if (active !== source) {
-      setFeedUrl(sources[source]);
+      setFeedUrls(sources[source]);
       setActive(source);
     }
   };
 
   const handleRefresh = () => {
     setIsRefreshing(true);
-    // This will trigger a re-render of FeedList component
     setTimeout(() => setIsRefreshing(false), 1000);
   };
 
@@ -33,12 +42,14 @@ export default function HomePage() {
       <div className="w-full px-3 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center space-y-6 py-4 sm:py-6">
           
-          {/* Enhanced Banner */}
+          {/* Enhanced Banner - Keep width and height for CLS fix */}
           <div className="w-full max-w-6xl relative overflow-hidden rounded-xl shadow-lg">
             <img 
               src="/banner.png" 
               alt="NBA NFL News Banner" 
               className="w-full h-32 sm:h-40 lg:h-48 object-cover"
+              width={1200} // IMPORTANT: Replace with actual banner width
+              height={300} // IMPORTANT: Replace with actual banner height
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent"></div>
           </div>
@@ -82,11 +93,13 @@ export default function HomePage() {
           </div>
         </div>
         
-        {/* Enhanced Feed Section */}
-        <div className="max-w-4xl mx-auto pb-8">
-          <FeedList url={feedUrl} key={feedUrl} isRefreshing={isRefreshing} />
+        {/* Main Content Area: Now only News Feed */}
+        {/* Reverted to single column layout for FeedList as chatbot is removed */}
+        <div className="max-w-4xl mx-auto pb-8"> {/* Adjusted max-width back to 4xl */}
+          <FeedList urls={feedUrls} key={feedUrls.join('-')} isRefreshing={isRefreshing} />
         </div>
       </div>
     </main>
   );
 }
+
